@@ -60,12 +60,12 @@ public class ChallengingDOMPageObject
     private ChallengingDOMPageObject editRow(RowPageObject rowPageObject)
     {
         rowPageObject.edit();
-        return this;
+        return this; // this line would normally return a completely different page object but the example does not navigate to the next edit page
     }
     private ChallengingDOMPageObject deleteRow(RowPageObject rowPageObject)
     {
         rowPageObject.delete();
-        return this;
+        return this; // this line would normally return a completely different page object but the example does not navigate to the next delete page
     }
     public ChallengingDOMPageObject isLoaded()
     {
