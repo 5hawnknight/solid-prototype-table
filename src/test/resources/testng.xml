@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="Sample table example suite">
+    <test name="table test">
+        <classes>
+            <class name="com.knight.tests.TableTest" />
+        </classes>
+    </test>
+</suite>
