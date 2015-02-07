@@ -18,6 +18,7 @@ public class RowPageObject
     }
     public boolean isRowMatch(String searchString)
     {
+        // use the Lorem column only as an example, but could swap out to a different column or a combination of columns
         return StringUtils.equalsIgnoreCase(readLoremColumn(),searchString);
     }
     public String readLoremColumn()
