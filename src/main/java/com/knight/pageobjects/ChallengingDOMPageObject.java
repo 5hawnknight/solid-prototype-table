@@ -13,6 +13,7 @@ import java.util.List;
 /**
  * Created by shawnknight on 2/7/15.
  */
+
 public class ChallengingDOMPageObject
 {
     private final WebDriver driver;
@@ -49,12 +50,12 @@ public class ChallengingDOMPageObject
     }
     private List<RowPageObject> getRowPageObjects()
     {
-        List<RowPageObject> libraryEPublications = new ArrayList<>();
+        List<RowPageObject> rowPageObjects = new ArrayList<>();
         for (WebElement element : tableRowElements)
         {
-            libraryEPublications.add(new RowPageObject(element));
+            rowPageObjects.add(new RowPageObject(element));
         }
-        return libraryEPublications;
+        return rowPageObjects;
     }
     private ChallengingDOMPageObject editRow(RowPageObject rowPageObject)
     {
