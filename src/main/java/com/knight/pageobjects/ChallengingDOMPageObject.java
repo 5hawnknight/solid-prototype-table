@@ -3,59 +3,47 @@ package com.knight.pageobjects;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by shawnknight on 2/7/15.
+ * Created by shawn knight
+ * shawn.knight.work@gmail.com
  */
 
 public class ChallengingDOMPageObject
 {
     private final WebDriver driver;
 
-    @FindBy(css = "table")      private WebElement dataTable;
-    @FindBy(css = "table tr")   private List<WebElement> tableRowElements;
+    @FindBy(css = "table")      private WebElement table;
+    @FindBy(css = "table tr")   private List<WebElement> rows;
 
     public ChallengingDOMPageObject searchAndEditRow(String text)
     {
-        for (RowPageObject rowPageObject : getRowPageObjects())
-        {
-            if (rowPageObject.isRowMatch(text))
-                return editRow(rowPageObject);
-        }
-        return PageFactory.initElements(driver,ChallengingDOMPageObject.class);
+        return editRow(rows.stream()
+                .map(row -> new RowPageObject(row))
+                .filter(poRow -> poRow.isMatch(text))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("unable to find row to edit")));
     }
     public ChallengingDOMPageObject searchAndDeleteRow(String text)
     {
-        for (RowPageObject rowPageObject : getRowPageObjects())
-        {
-            if (rowPageObject.isRowMatch(text))
-                return deleteRow(rowPageObject);
-        }
-        return PageFactory.initElements(driver,ChallengingDOMPageObject.class);
+        return deleteRow(rows.stream()
+                .map(row -> new RowPageObject(row))
+                .filter(poRow -> poRow.isMatch(text))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("unable to find row to delete")));
     }
     public String searchAndReadAmetColumn(String text)
     {
-        for (RowPageObject rowPageObject : getRowPageObjects())
-        {
-            if (rowPageObject.isRowMatch(text))
-                return rowPageObject.readAmetColumn();
-        }
-        return "";
-    }
-    private List<RowPageObject> getRowPageObjects()
-    {
-        List<RowPageObject> rowPageObjects = new ArrayList<>();
-        for (WebElement element : tableRowElements)
-        {
-            rowPageObjects.add(new RowPageObject(element));
-        }
-        return rowPageObjects;
+        return rows.stream()
+                .map(row -> new RowPageObject(row))
+                .filter(poRow -> poRow.isMatch(text))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("unable to find row to read"))
+                .readAmetColumn();
     }
     private ChallengingDOMPageObject editRow(RowPageObject rowPageObject)
     {
@@ -69,7 +57,7 @@ public class ChallengingDOMPageObject
     }
     public ChallengingDOMPageObject isLoaded()
     {
-        new WebDriverWait(driver,10).until(ExpectedConditions.visibilityOfAllElements(tableRowElements));
+        new WebDriverWait(driver,10).until(ExpectedConditions.visibilityOfAllElements(rows));
         return this;
     }
     public ChallengingDOMPageObject(WebDriver driver)

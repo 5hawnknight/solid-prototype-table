@@ -2,15 +2,15 @@ package com.knight.tests;
 
 import com.knight.pageobjects.ChallengingDOMPageObject;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 /**
- * Created by shawnknight on 2/7/15.
+ * Created by shawn knight
+ * shawn.knight.work@gmail.com
  */
 public class TableTest
 {
@@ -19,7 +19,8 @@ public class TableTest
     @BeforeTest
     public void setup()
     {
-        driver = new FirefoxDriver();
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.2.27");
+        driver = new ChromeDriver();
         driver.get("http://the-internet.herokuapp.com/challenging_dom");
     }
     @Test

@@ -5,7 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 /**
- * Created by shawnknight on 2/7/15.
+ * Created by shawn knight
+ * shawn.knight.work@gmail.com
  */
 
 public class RowPageObject
@@ -16,7 +17,7 @@ public class RowPageObject
     {
         this.element = element;
     }
-    public boolean isRowMatch(String searchString)
+    public boolean isMatch(String searchString)
     {
         // use the Lorem column only as an example, but could swap out to a different column or a combination of columns
         return StringUtils.equalsIgnoreCase(readLoremColumn(),searchString);
